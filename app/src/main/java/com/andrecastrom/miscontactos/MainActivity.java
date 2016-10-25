@@ -24,10 +24,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-/*
+
         Toolbar miActionBar = (Toolbar) findViewById(R.id.miActionBar);
         setSupportActionBar(miActionBar);
-*/
+
         listaContactos = (RecyclerView) findViewById(R.id.rvContactos);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
