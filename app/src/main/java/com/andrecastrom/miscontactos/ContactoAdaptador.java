@@ -1,5 +1,7 @@
 package com.andrecastrom.miscontactos;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.test.suitebuilder.TestMethod;
 import android.view.LayoutInflater;
@@ -7,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -17,9 +20,11 @@ import java.util.ArrayList;
 public class ContactoAdaptador extends RecyclerView.Adapter<ContactoAdaptador.ContactoViewHolder> {
 
     ArrayList<Contacto> contactos;
+    Activity activity;
 
-    public ContactoAdaptador(ArrayList<Contacto> contactos) {
+    public ContactoAdaptador(ArrayList<Contacto> contactos, Activity activity) {
         this.contactos = contactos;
+        this.activity = activity;
     }
 
 
@@ -33,10 +38,22 @@ public class ContactoAdaptador extends RecyclerView.Adapter<ContactoAdaptador.Co
     //Asocia cada elemento de la lista con cada view
     @Override
     public void onBindViewHolder(ContactoViewHolder contactoViewHolder, int position) {
-        Contacto contacto = contactos.get(position);
+        final Contacto contacto = contactos.get(position);
         contactoViewHolder.imgFoto.setImageResource(contacto.getFoto());
         contactoViewHolder.tvNombreCV.setText(contacto.getNombre());
         contactoViewHolder.tvTelefonoCV.setText(contacto.getTelefono());
+
+        contactoViewHolder.imgFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(activity, contacto.getNombre(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(activity, DetalleContacto.class);
+                intent.putExtra("nombre", contacto.getNombre());
+                intent.putExtra("telefono", contacto.getTelefono());
+                intent.putExtra("email", contacto.getEmail());
+                activity.startActivity(intent);
+            }
+        });
     }
 
     @Override
