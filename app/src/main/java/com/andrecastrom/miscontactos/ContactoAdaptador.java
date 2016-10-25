@@ -7,6 +7,7 @@ import android.test.suitebuilder.TestMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +43,12 @@ public class ContactoAdaptador extends RecyclerView.Adapter<ContactoAdaptador.Co
         contactoViewHolder.imgFoto.setImageResource(contacto.getFoto());
         contactoViewHolder.tvNombreCV.setText(contacto.getNombre());
         contactoViewHolder.tvTelefonoCV.setText(contacto.getTelefono());
+        contactoViewHolder.btnLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(activity, "Diste like a " + contacto.getNombre(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         contactoViewHolder.imgFoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,12 +73,14 @@ public class ContactoAdaptador extends RecyclerView.Adapter<ContactoAdaptador.Co
         private ImageView imgFoto;
         private TextView tvNombreCV;
         private TextView tvTelefonoCV;
+        private ImageButton btnLike;
 
         public ContactoViewHolder(View itemView) {
             super(itemView);
             imgFoto = (ImageView) itemView.findViewById(R.id.imgFoto);
             tvNombreCV = (TextView) itemView.findViewById(R.id.tvNombreCV);
             tvTelefonoCV = (TextView) itemView.findViewById(R.id.tvTelefonoCV);
+            btnLike = (ImageButton) itemView.findViewById(R.id.btnLike);
         }
     }
 
